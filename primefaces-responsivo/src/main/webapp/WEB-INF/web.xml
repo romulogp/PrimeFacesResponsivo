@@ -9,12 +9,16 @@
 		<param-value>none</param-value>
 	</context-param>
 	<context-param>
+		<param-name>primefaces.THEME</param-name>
+		<param-value>omega</param-value>
+	</context-param>
+	<context-param>
 		<param-name>primefaces.SUBMIT</param-name>
 		<param-value>partial</param-value>
 	</context-param>
 	<context-param>
-		<param-name>primefaces.THEME</param-name>
-		<param-value>omega</param-value>
+		<param-name>primefaces.CLIENT_SIDE_VALIDATION</param-name>
+		<param-value>true</param-value>
 	</context-param>
 	<context-param>
 		<param-name>primefaces.FONT_AWESOME</param-name>
@@ -27,10 +31,6 @@
 	<context-param>
 		<param-name>javax.faces.FACELETS_REFRESH_PERIOD</param-name>
 		<param-value>0</param-value>
-	</context-param>
-	<context-param>
-		<param-name>primefaces.CLIENT_SIDE_VALIDATION</param-name>
-		<param-value>true</param-value>
 	</context-param>
 
 	<servlet>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	
+<h:head>
+	<f:facet name="first">
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+	</f:facet>
+	<title>RGP Systems</title>
+	
+	<h:outputStylesheet library="rgp" name="styles/layout.css" />
+	<h:outputStylesheet library="rgp" name="styles/components.css" />
+	
+	<h:outputScript target="body" library="primefaces" name="jquery/jquery.js" />
+	<h:outputScript target="body" library="rgp" name="javascripts/app.js" />
+</h:head>
+
+<h:body>
+	
+	<header class="rgp-topbar">
+		<h:graphicImage library="rgp" name="images/rgp-logo.png" />
+		
+		<a href="#" class="rgp-toggle  js-toggle"><i class="fa  fa-bars fa-2x"></i></a>
+	</header>
+	
+	<aside class="rgp-sidebar  js-sidebar">
+		
+	</aside>
+	
+	<section class="rgp-content  js-content">
+		<h1>Conteúdo</h1>		
+	</section>
+	
+</h:body>
+
+</html>

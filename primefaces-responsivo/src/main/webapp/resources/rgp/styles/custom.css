@@ -1,0 +1,56 @@
+body {
+	margin: 0;
+	font-size: 13px;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* ICONS */
+.ui-icon {
+	text-shadow: none !important;
+}
+
+/* TABVIEW */
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected a {
+	color: #555;
+}
+@media(max-width: 640px) {
+	.ui-tabs.ui-tabs-top > .ui-tabs-nav li {
+		width: 100%;
+	}
+}
+
+/* INPUTFIELD */
+.ui-inputfield {
+	padding: 8px 12px !important;
+}
+
+.ui-selectonemenu .ui-selectonemenu-trigger .ui-icon {
+	margin-top: 7px !important;
+	margin-left: 1px !important;
+}
+
+/* BUTTON */
+.ui-button {
+	padding: 4px 6px !important;
+}
+
+/* SELECTONEMENU */
+.ui-selectonemenu-panel .ui-selectonemenu-item {
+	padding: 8px !important;
+}
+
+/* SELECTONERADIO */
+.ui-selectoneradio label {
+	margin-right: 10px !important;
+}
+
+/* DIALOG */
+.ui-dialog {
+	width: 540px !important;
+	z-index: 10001 !important;
+}
+@media(max-width: 540px) {
+	.ui-dialog {
+		width: 100% !important;
+	}
+}

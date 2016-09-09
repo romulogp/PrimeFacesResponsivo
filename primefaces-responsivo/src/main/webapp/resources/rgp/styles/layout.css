@@ -4,14 +4,14 @@
 	top: 0;
 	right: 0;
 	left: 0;
-	height: 84px;
+	height: 60px;
 	z-index: 9999;
 	
 	background-color: #303030;
 }
 
 .rgp-topbar > img {
-	margin-top: 5px;
+	margin-top: 10px;
 	margin-left: 5px;
 	float: left;
 }
@@ -20,7 +20,7 @@
 .rgp-sidebar {
 	width: 210px;
 	position: fixed;
-	top: 84px;
+	top: 60px;
 	bottom: 0;
 	left: 0;
 	margin-left: -211px;
@@ -47,6 +47,7 @@
 
 /* CONTENT */
 .rgp-content {
+	padding: 0 15px;
 	margin-top: 84px;
 	transition: margin-left 0.5s;
 }

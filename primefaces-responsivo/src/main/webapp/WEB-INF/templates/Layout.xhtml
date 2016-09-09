@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 	
 <h:head>
 	<f:facet name="first">
@@ -10,6 +11,7 @@
 	</f:facet>
 	<title>RGP Systems</title>
 	
+	<h:outputStylesheet library="rgp" name="styles/custom.css" />
 	<h:outputStylesheet library="rgp" name="styles/layout.css" />
 	<h:outputStylesheet library="rgp" name="styles/components.css" />
 	
@@ -21,16 +23,15 @@
 	
 	<header class="rgp-topbar">
 		<h:graphicImage library="rgp" name="images/rgp-logo.png" />
-		
 		<a href="#" class="rgp-toggle  js-toggle"><i class="fa  fa-bars fa-2x"></i></a>
 	</header>
 	
 	<aside class="rgp-sidebar  js-sidebar">
-		
+		<ui:include src="Menu.xhtml" />
 	</aside>
 	
 	<section class="rgp-content  js-content">
-		<h1>Conteúdo</h1>		
+		<ui:insert name="content" />	
 	</section>
 	
 </h:body>

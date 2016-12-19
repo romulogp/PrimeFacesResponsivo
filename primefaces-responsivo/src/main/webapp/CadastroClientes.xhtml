@@ -13,16 +13,20 @@
 		<h:form>
 			<p:toolbar>
 				<p:toolbarGroup>
-					<p:commandButton value="Salvar" />
+					<p:commandButton value="Salvar" action="#{clientesManager.salvar}"
+						process="tabs @this" update="@form" />
 				</p:toolbarGroup>
 				<p:toolbarGroup align="right">
-					<p:commandButton value="Novo" />
+					<p:commandButton value="Novo" action="#{clientesManager.novoCliente}"
+						process="@this" update="@form" />
 					<p:button value="Pesquisa" outcome="PesquisaClientes" />
 				</p:toolbarGroup>
 			</p:toolbar>
 		</h:form>
-			
-		<p:tabView style="margin-top: 20px">
+		
+		<p:messages autoUpdate="false" />
+		
+		<p:tabView id="tabs" style="margin-top: 20px">
 		
 			<p:tab title="Dados Gerais">
 				<h:form>
@@ -33,30 +37,30 @@
 								<p:inputText id="nome" required="true" />
 							</div>
 							<div class="ui-g-12 form-group">
+								<p:outputLabel value="CPF" for="cpf" />
+								<p:inputMask mask="999.999.999-99" id="cpf" value="#{clientesManager.clienteEdicao.cpf}" />
+							</div>
+							<div class="ui-g-12 form-group">
 								<p:outputLabel value="Telefone" for="telefone" />
-								<p:inputText id="telefone" required="true" />
+								<p:inputMask mask="(99) 99999?9999" id="telefone" required="true" value="#{clientesManager.clienteEdicao.telefone}" />
 							</div>
 							<div class="ui-g-12 form-group">
 								<p:outputLabel value="E-mail" for="email" />
-								<p:inputText id="email" required="true" />
+								<p:inputText id="email" required="true" value="#{clientesManager.clienteEdicao.email}" />
 							</div>
 							<div class="ui-g-12 form-group">
 								<p:outputLabel value="Data Nascimento" for="nascimento" />
-								<p:calendar id="nascimento" />
+								<p:calendar id="nascimento" pattern="dd/MM/yyyy" value="#{clientesManager.clienteEdicao.dataNascimento}" />
 							</div>
 						</div>
 						<div class="ui-g-12 ui-md-6 no-padding">
 							<div class="ui-g-12 form-group">
 								<p:outputLabel value="Celular" for="celular" />
-								<p:inputText id="celular" />
-							</div>
-							<div class="ui-g-12 form-group">
-								<p:outputLabel value="CPF" for="cpf" />
-								<p:inputMask id="cpf" mask="999.999.999-99" required="true" />
+								<p:inputText id="celular" value="#{clientesManager.clienteEdicao.celular}" />
 							</div>
 							<div class="ui-g-12 form-group">
 								<p:outputLabel value="Estado" for="estado" />
-								<p:selectOneMenu id="estado">
+								<p:selectOneMenu id="estado" value="#{clientesManager.clienteEdicao.estado}">
 									<f:selectItem itemLabel="Selecione" />
 									<f:selectItem itemLabel="Santa Catarina" />
 									<f:selectItem itemLabel="São Paulo" />
@@ -64,7 +68,8 @@
 							</div> 
 							<div class="ui-g-12 form-group">
 								<p:outputLabel value="Parcelamento Liberado" for="parcLiberado" />
-								<p:selectOneRadio id="parcLiberado" converter="javax.faces.Boolean">
+								<p:selectOneRadio id="parcLiberado" converter="javax.faces.Boolean"
+									value="#{clientesManager.clienteEdicao.parcelamentoLiberado}">
 									<f:selectItem itemLabel="Sim" itemValue="true" />
 									<f:selectItem itemLabel="Não" itemValue="false" />
 								</p:selectOneRadio>
@@ -75,14 +80,21 @@
 			</p:tab>
 			
 			<p:tab title="Endereços">
-				<h:form>
+				<h:form id="formEnderecos">
 					<p:commandButton value="Novo Endereço"
-						oncomplete="PF('novoEnderecoDialog').show()" />
+						oncomplete="PF('novoEnderecoDialog').show()"
+						action="#{clientesManager.novoEndereco}"
+						process="@this" update="novoEnderecoDialog">
+						<p:resetInput target="novoEnderecoDialog" />
+					</p:commandButton>
 					
-					<p:dataTable value="#{clientesManager.clienteEdicao.enderecos}" var="endereco"
-						emptyMessage="O cliente ainda não possui endereços cadastrados."
+					<p:dataTable id="table" value="#{clientesManager.clienteEdicao.enderecos}" 
+						var="endereco" emptyMessage="O cliente ainda não possui endereços cadastrados."
 						style="margin-top: 10px">
 						
+						<p:column headerText="Logradouro" sortBy="#{endereco.logradouro}">
+							<h:outputText value="#{endereco.logradouro}" />
+						</p:column>
 						<p:column headerText="Número" sortBy="#{endereco.numero}">
 							<h:outputText value="#{endereco.numero}" />
 						</p:column>
@@ -100,8 +112,8 @@
 				<h:form>
 					<div class="ui-g form-container ui-fluid">
 						<p:inputTextarea rows="7" placeholder="Observações..."
-							maxlength="500"
-							counter="obsCounter" counterTemplate="{0} caracteres restante(s)">
+							maxlength="500" counter="obsCounter" counterTemplate="{0} caracteres restante(s)"
+							value="#{clientesManager.clienteEdicao.observacao}">
 						</p:inputTextarea>
 						<h:outputText id="obsCounter" />
 					</div>
@@ -113,32 +125,43 @@
 		<p:dialog header="Novo Endereço" 
 			id="novoEnderecoDialog" widgetVar="novoEnderecoDialog"
 			resizable="false" responsive="true">
+			
 			<h:form>
 				<div class="ui-fluid">
+				
+					<p:messages autoUpdate="false" />
+					
 					<div class="ui-g form-container">
 						<div class="ui-g-12 form-group">
 							<p:outputLabel value="Logradouro" for="logradouro" />
-							<p:inputText id="logradouro" placeholder="Ex. Rua Osvaldo Reis" required="true" />
+							<p:inputText id="logradouro" placeholder="Ex. Rua Osvaldo Reis" required="true"
+								value="#{clientesManager.enderecoEdicao.logradouro}" />
 						</div>
 						<div class="ui-g-12 form-group">
 							<p:outputLabel value="Número" for="numero" />
 							<p:inputNumber id="numero" placeholder="Ex. 1245" required="true"
-								thousandSeparator="" decimalPlaces="0" decimalSeparator="," maxValue="99999999" />
+								thousandSeparator="" decimalPlaces="0" decimalSeparator="," maxValue="99999999"
+								value="#{clientesManager.enderecoEdicao.numero}" />
 						</div>
 						<div class="ui-g-12 form-group">
 							<p:outputLabel value="Bairro" for="bairro" />
-							<p:inputText id="bairro" placeholder="Ex. Bairro" required="true" />
+							<p:inputText id="bairro" placeholder="Ex. Bairro"
+								value="#{clientesManager.enderecoEdicao.bairro}" />
 						</div>
 						<div class="ui-g-12 form-group">
 							<p:outputLabel value="Cidade" for="cidade" />
-							<p:inputText id="cidade" placeholder="Ex. Itajaí" required="true" />
+							<p:inputText id="cidade" placeholder="Ex. Itajaí"
+								value="#{clientesManager.enderecoEdicao.cidade}" />
 						</div>
 					</div>
 				</div>						
 				<div class="ui-g">
 					<div class="ui-g-12">
 						<p:commandButton value="Salvar" icon="fa  fa-save"
-							style="float: right">
+							style="float: right" update="@form tabs:formEnderecos:table"
+							oncomplete="if (!args.validationFailed) PF('novoEnderecoDialog').hide()">
+							<p:collector value="#{clientesManager.enderecoEdicao}"
+								addTo="#{clientesManager.clienteEdicao.enderecos}" />
 						</p:commandButton>
 						<p:commandButton value="Fechar" icon="fa  fa-ban"
 							type="button" onclick="PF('novoEnderecoDialog').hide();"
@@ -147,6 +170,7 @@
 					</div>
 				</div>
 			</h:form>
+			
 		</p:dialog>
 		
 	</ui:define>

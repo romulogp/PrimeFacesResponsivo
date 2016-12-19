@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<f:view>
+		
+		<p:focus id="dialogFocus" context="panel" />
+		<p:panel id="panel" styleClass="dialog-panel-form"> 
+			
+			<h:form>
+				<div class="ui-fluid">
+				
+					<p:messages autoUpdate="false" />
+					
+					<div class="ui-g form-container">
+						<div class="ui-g-12 form-group">
+							<p:outputLabel value="Logradouro" for="logradouro" />
+							<p:inputText id="logradouro" placeholder="Ex. Rua Osvaldo Reis" required="true"
+								value="#{clientesManager.enderecoEdicao.logradouro}" />
+						</div>
+						<div class="ui-g-12 form-group">
+							<p:outputLabel value="Número" for="numero" />
+							<p:inputNumber id="numero" placeholder="Ex. 1245" required="true"
+								thousandSeparator="" decimalPlaces="0" decimalSeparator="," maxValue="99999999"
+								value="#{clientesManager.enderecoEdicao.numero}" />
+						</div>
+						<div class="ui-g-12 form-group">
+							<p:outputLabel value="Bairro" for="bairro" />
+							<p:inputText id="bairro" placeholder="Ex. Bairro"
+								value="#{clientesManager.enderecoEdicao.bairro}" />
+						</div>
+						<div class="ui-g-12 form-group">
+							<p:outputLabel value="Cidade" for="cidade" />
+							<p:inputText id="cidade" placeholder="Ex. Itajaí"
+								value="#{clientesManager.enderecoEdicao.cidade}" />
+						</div>
+					</div>
+				</div>						
+				<div class="ui-g">
+					<div class="ui-g-12">
+						<p:commandButton value="Salvar" icon="fa  fa-save"
+							style="float: right" update="@form enderecosTable">
+							<p:collector value="#{clientesManager.enderecoEdicao}"
+								addTo="#{clientesManager.clienteEdicao.enderecos}" />
+						</p:commandButton>
+						<p:commandButton value="Fechar" icon="fa  fa-ban"
+							type="button" onclick="PF('novoEnderecoDialog').hide();"
+							style="float: right">
+						</p:commandButton>
+					</div>
+				</div>
+			</h:form>
+		
+		</p:panel>
+		
+	</f:view>	
+	
+</html>

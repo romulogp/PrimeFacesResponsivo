@@ -13,7 +13,7 @@
 		
 			<p:toolbar>
 				<p:toolbarGroup align="right">
-					<p:button value="Novo Cliente" outcome="CadastroClientes" />
+					<p:button value="Novo Cliente" icon="fa fa-plus-circle" outcome="CadastroClientes" />
 				</p:toolbarGroup>
 			</p:toolbar>
 			
@@ -33,7 +33,8 @@
 				</p:column>
 				
 				<f:facet name="footer">
-					<p:commandButton value="Editar" icon="fa  fa-edit" />
+					<p:commandButton value="Editar" icon="fa  fa-edit"
+						action="CadastroClientes?faces-redirect=true" />
 				</f:facet>
 			</p:dataTable>
 			

@@ -49,7 +49,7 @@ public class ClientesManager implements Serializable {
 
 	public String novoCliente() {
 		clienteEdicao = new Cliente();
-		return "CadastroCliente?faces-redirect=true";
+		return "CadastroClientes?faces-redirect=true";
 	}
 	
 	public void salvar() {
